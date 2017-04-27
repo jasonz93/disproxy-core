@@ -26,12 +26,14 @@ class RedisBroadcast extends BaseBroadcast {
         } else {
             throw new Error('Redis broadcast url must contains path.');
         }
-        this.redisSub = redis.createClient(redisOpts);
-        this.redisSub.on('message', (topic, msg) => {
-            if (topic === this.topic) {
-                listener(JSON.parse(msg));
-            }
-        });
+        if (listener) {
+            this.redisSub = redis.createClient(redisOpts);
+            this.redisSub.on('message', (topic, msg) => {
+                if (topic === this.topic) {
+                    listener(JSON.parse(msg));
+                }
+            });
+        }
         this.redisSub.subscribe(this.topic);
         this.redisPub = redis.createClient(redisOpts);
     }

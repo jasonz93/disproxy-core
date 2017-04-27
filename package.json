@@ -20,7 +20,9 @@
     "ali-ons": "^1.0.0",
     "bluebird": "^3.5.0",
     "mongoose": "^4.9.6",
-    "redis": "^2.7.1"
+    "redis": "^2.7.1",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",

@@ -27,19 +27,21 @@ class RedisMessageQueue extends BaseMessageQueue {
             throw new Error('Redis broadcast url must contains path.');
         }
         this.redis = redis.createClient(redisOpts);
-        let recvFunc = () => {
-            this.redis.blpop(this.topic, 1, (err, data) => {
-                if (err) {
-                    console.error(err);
-                } else {
-                    if (data !== null) {
-                        listener(JSON.parse(data[1]));
+        if (listener) {
+            let recvFunc = () => {
+                this.redis.blpop(this.topic, 1, (err, data) => {
+                    if (err) {
+                        console.error(err);
+                    } else {
+                        if (data !== null) {
+                            listener(JSON.parse(data[1]));
+                        }
                     }
-                }
-                recvFunc();
-            });
+                    recvFunc();
+                });
+            };
+            recvFunc();
         }
-        recvFunc();
     }
 
     async send(msg) {

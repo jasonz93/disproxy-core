@@ -9,15 +9,18 @@ const ProxySchema = new Schema({
     external_ip: String,
     internal_ip: String,
     port: Number,
-    prototype: String,
+    protocol: String,
     type: String,
-    bans: [String],
+    bans: {
+        type: [String],
+        default: []
+    },
     create_at: Date,
     update_at: Date
 });
 
 exports.AttachModel = function (mongoose) {
-    mongoose.model('Proxy', ProxySchema);
+    return mongoose.model('Proxy', ProxySchema);
 };
 
 exports.Schema = ProxySchema;
