@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/jasonz93/disproxy-core#readme",
   "dependencies": {
-    "ali-ons": "^1.0.0",
+    "aliyun-sdk": "^1.10.1",
     "bluebird": "^3.5.0",
     "mongoose": "^4.9.6",
     "redis": "^2.7.1",
